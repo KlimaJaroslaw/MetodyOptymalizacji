@@ -16,6 +16,12 @@ constraint forall(j in KNAPSACK) (
     sum(i in ITEM) (x[i,j] * weights[i]) <= capacities[j]
 );
 
+constraint forall(j in KNAPSACK) (
+    sum(i in ITEM) (x[i,j]) >= 2
+);
+
+constraint sum(i in ITEM, j in KNAPSACK) (x[i,j]) <= n-2;
+
 solve maximize sum(i in ITEM, j in KNAPSACK) (x[i,j] * profits[i]);
 
 output [
